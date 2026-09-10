@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  BARBER
+  CLIENT
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(CLIENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  schedules Schedule[]
+  barberShop BarberShop?
+}
+
+model Schedule {
+  id        String   @id @default(uuid())
+  userId    String
+  barberShopId String
+  startTime DateTime
+  endTime   DateTime
+  status    String
+  paid      Boolean  @default(false)   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orderId   String?
+
+  user User @relation(fields: [userId], references: [id])
+  barberShop BarberShop @relation(fields: [barberShopId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([orderId])
+}
+
+model BarberShop {
+  userId    String   @unique
+  id        String   @id @default(uuid())
+  name      String
+  address   String?
+  number    Int
+  state  String
+  city  String
+  openTime  String
+  closeTime  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  schedules Schedule[]
+}
