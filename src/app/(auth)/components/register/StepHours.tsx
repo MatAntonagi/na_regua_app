@@ -1,14 +1,14 @@
 "use client";
 
 import { dayList } from "@/src/constants/dayList";
-import useSchedules from "@/src/hooks/useSchedules";
+import { useSchedules } from "@/src/hooks/useSchedules";
 import DayRow from "./DayRow";
 
 interface HoursProps {
   onBack: () => void;
 }
 
-export default function StepHours({ onBack }: HoursProps) {
+export function StepHours({ onBack }: HoursProps) {
   const { schedules, updatedDay } = useSchedules();
   return (
     <div className="flex flex-col items-center justify-between py-3">

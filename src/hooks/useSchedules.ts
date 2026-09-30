@@ -18,7 +18,7 @@ export type SchedulesType = {
   domingo: DayHours;
 };
 
-export default function useSchedules() {
+export function useSchedules() {
   const defaultHours: DayHours = {
     active: true,
     open: "09:00",

@@ -9,7 +9,7 @@ interface UseStepReturn {
   prevStep: () => void;
 }
 
-export default function useStep(): UseStepReturn {
+export function useStep(): UseStepReturn {
   const [step, setStep] = useState(1);
 
   function nextStep() {

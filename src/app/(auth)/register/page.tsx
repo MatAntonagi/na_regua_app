@@ -4,8 +4,8 @@ import Link from "next/link";
 import ProgressBar from "../components/register/ProgressBar";
 import StepBarberShop from "../components/register/StepBarberShop";
 import StepContact from "../components/register/StepContact";
-import StepHours from "../components/register/StepHours";
-import useStep from "@/src/hooks/useStepReturn";
+import { StepHours } from "../components/register/StepHours";
+import { useStep } from "@/src/hooks/useStepReturn";
 import { IconChevronLeft } from "@tabler/icons-react";
 
 export default function RegisterPage() {
