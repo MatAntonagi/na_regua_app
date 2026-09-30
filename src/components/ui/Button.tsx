@@ -1,15 +1,18 @@
 import { ButtonHTMLAttributes } from "react";
+import { cn } from "@/src/lib/utils";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "outline" | "ghost";
   size?: "md" | "sm";
   isLoading?: boolean;
+  className?: string;
 }
 
 export function Button({
   variant = "primary",
   size = "md",
   children,
+  className,
   isLoading = false,
   ...props
 }: ButtonProps) {
@@ -25,7 +28,12 @@ export function Button({
   };
   return (
     <button
-      className={`font-bold transition active:scale-[0.98] ${variants[variant]} ${sizes[size]}`}
+      className={cn(
+        "cursor-pointer font-bold transition active:scale-[0.98]",
+        variants[variant],
+        sizes[size],
+        className,
+      )}
       {...props}
       disabled={props.disabled || isLoading}
     >
